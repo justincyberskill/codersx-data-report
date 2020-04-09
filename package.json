@@ -1,0 +1,18 @@
+{
+  "name": "lms-data-analysis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.codersx:justincorize/lms-data-analysis.git",
+  "author": "Justin Jr <minh-thong.lu@cyberskill.tech>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "googleapis": "^48.0.0",
+    "mongoose": "^5.9.7"
+  }
+}
