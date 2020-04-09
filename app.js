@@ -1,8 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const app = express();
+require("dotenv").config()
+const app = require("express")()
 
-const { PORT } = process.env;
+require("./utils/mongoose")()
+require("./utils/googleapis")()
 
-
-app.listen(PORT, () => console.log(`🚀 Server is running at port ${PORT}`));
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`🚀 Server is running at port ${port}`))
