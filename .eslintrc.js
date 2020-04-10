@@ -9,7 +9,6 @@ module.exports = {
         tabWidth: 2
       }
     ],
-    'no-debugger': 'error',
-    'no-console': 'warn'
+    'no-debugger': 'error'
   }
 };

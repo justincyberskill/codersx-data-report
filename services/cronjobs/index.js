@@ -1,1 +1,1 @@
-export * from './daily-report';
+export * from './daily';
