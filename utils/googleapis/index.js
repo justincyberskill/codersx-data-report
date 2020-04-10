@@ -1,7 +1,7 @@
-const { google } = require("googleapis")
-const { SHEET_CLIENT_EMAIL, SHEET_PRIVATE_KEY } = process.env
+import { google } from 'googleapis';
+const { SHEET_CLIENT_EMAIL, SHEET_PRIVATE_KEY } = process.env;
 
-const scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
 function connect() {
   // Create client's credential object
   const client = new google.auth.JWT(
@@ -9,25 +9,35 @@ function connect() {
     null,
     SHEET_PRIVATE_KEY,
     scopes
-  )
+  );
 
   // Get BEARER token for client's credential
   client.authorize(function (err) {
     if (err) {
-      console.log("Fail to authorize Google Sheet\n", err.message)
-      return
+      console.log('Fail to authorize Google Sheet\n', err.message);
+      return;
     }
-    console.log("🍣 Great! Connected to GoogleSheet API")
-  })
+    console.log('🍣 Great! Connected to GoogleSheet API');
+  });
 
   // Use client's credential included BEARER token
-  return client
+  return client;
 }
 
-const client = connect()
+const clientConnected = connect();
 const gsapi = google.sheets({
-  version: "v4",
-  auth: client
-})
+  version: 'v4',
+  auth: clientConnected
+});
 
-module.exports = gsapi
+// ------ Setup codes ------
+export function writeToSheet(spreadsheetId, range, values) {
+  gsapi.spreadsheets.values.append({
+    spreadsheetId,
+    range,
+    valueInputOption: 'USER_ENTERED',
+    requestBody: { values }
+  });
+}
+
+export default gsapi;
