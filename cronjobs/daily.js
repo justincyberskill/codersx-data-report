@@ -5,6 +5,7 @@ import { appendDataToSheet } from '../utils/googleapis';
 import modelReviews from '../models/reviews';
 import modelUnlockExercies from '../models/unlockExercise';
 import modelBookings from '../models/bookings';
+import modelCompletedLessons from '../models/completedlessons';
 
 // ------ Mongoose models interations with database ------
 const models = {
@@ -39,7 +40,7 @@ const models = {
     ]);
     return data;
   },
-  // Total completed booking in day
+  // Total completed bookings in day
   getTotalCompletedBooking: async (date) => {
     const minTimestamp = moment(date).startOf('date').toDate();
     const maxTimestamp = moment(date).endOf('date').toDate();
@@ -48,6 +49,20 @@ const models = {
         $match: {
           updatedAt: { $gte: minTimestamp, $lte: maxTimestamp },
           status: 'completed',
+        },
+      },
+      { $group: { _id: null, total: { $sum: 1 } } },
+    ]);
+    return data;
+  },
+  // Tota completed lessons in day
+  getTotalCompletedLesson: async (date) => {
+    const minTimestamp = moment(date).startOf('date').toDate();
+    const maxTimestamp = moment(date).endOf('date').toDate();
+    const data = await modelCompletedLessons.aggregate([
+      {
+        $match: {
+          updatedAt: { $gte: minTimestamp, $lte: maxTimestamp },
         },
       },
       { $group: { _id: null, total: { $sum: 1 } } },
@@ -69,13 +84,15 @@ agenda.define('spreadsheet daily report', async () => {
       totalReview,
       totalUnlockExercise,
       totalCompletedBooking,
+      totalCompletedLessions,
     ] = await Promise.all([
       models.getAvgStarOfReview(reportDate),
       models.getTotalReview(reportDate),
       models.getTotalUnlockedExercise(reportDate),
       models.getTotalCompletedBooking(reportDate),
+      models.getTotalCompletedLesson(reportDate),
     ]);
-    console.log(totalCompletedBooking);
+    console.log(totalCompletedLessions);
 
     // Build Spreadsheet Schema
     const reportPayload = [
@@ -84,7 +101,8 @@ agenda.define('spreadsheet daily report', async () => {
         avgStarOfReview[0] ? avgStarOfReview[0].avg : 'error', // Column: average review star,
         totalReview[0] ? totalReview[0].total : 'error', // Column: total review,
         totalUnlockExercise[0] ? totalUnlockExercise[0].total : 'error', // Column: total unlocked exercise,
-        totalCompletedBooking[0] ? totalCompletedBooking[0].total : 'error', // Column: total booking completed,
+        totalCompletedBooking[0] ? totalCompletedBooking[0].total : 'error', // Column: total completed bookings,
+        totalCompletedLessions[0] ? totalCompletedLessions[0].total : 'error', // Column: total completed lessons,
       ],
     ];
 
