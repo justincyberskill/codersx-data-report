@@ -1,4 +1,5 @@
 import { google } from 'googleapis';
+
 const { SHEET_CLIENT_EMAIL, SHEET_PRIVATE_KEY } = process.env;
 
 const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
@@ -8,11 +9,11 @@ function connect() {
     SHEET_CLIENT_EMAIL,
     null,
     SHEET_PRIVATE_KEY,
-    scopes
+    scopes,
   );
 
   // Get BEARER token for client's credential
-  client.authorize(function (err) {
+  client.authorize((err) => {
     if (err) {
       console.log('Fail to authorize Google Sheet\n', err.message);
       return;
@@ -27,16 +28,16 @@ function connect() {
 const clientConnected = connect();
 const gsapi = google.sheets({
   version: 'v4',
-  auth: clientConnected
+  auth: clientConnected,
 });
 
 // ------ Setup codes ------
-export function writeToSheet(spreadsheetId, range, values) {
+export function appendDataToSheet(spreadsheetId, range, values) {
   gsapi.spreadsheets.values.append({
     spreadsheetId,
     range,
     valueInputOption: 'USER_ENTERED',
-    requestBody: { values }
+    requestBody: { values },
   });
 }
 

@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "cron": "^1.8.2",
+    "agenda": "^3.1.0",
     "dotenv": "^8.2.0",
     "global": "^4.4.0",
     "googleapis": "^48.0.0",
@@ -31,10 +31,11 @@
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.5",
-    "@babel/preset-stage-3": "^7.8.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.3",

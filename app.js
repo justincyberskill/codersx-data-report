@@ -1,8 +1,8 @@
 import mongoose from './utils/mongoose'; // Setup MongoDB Database
-import { dailyCtl } from './controllers';
+import dailyAgenda from './cronjobs/daily';
 
-function startServer() {
-  dailyCtl(new Date(2020, 2, 28));
+function onConnected() {
+  dailyAgenda();
 }
 
-mongoose.connect(startServer);
+mongoose.connect(onConnected);

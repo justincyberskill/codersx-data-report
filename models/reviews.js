@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const { Date, String, ObjectId, Number } = mongoose.SchemaTypes;
 
 const schema = new mongoose.Schema({
@@ -8,8 +9,7 @@ const schema = new mongoose.Schema({
   text: String,
   mentor: ObjectId,
   booking: ObjectId,
-  rating: Number
+  rating: Number,
 });
 
-const model = mongoose.model('review', schema);
-module.exports = model;
+export default mongoose.model('review', schema);
