@@ -7,8 +7,8 @@ export const { MONGO_URI_LOCAL: mongoUri } = process.env;
 export default {
   connect(callback) {
     mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
       useUnifiedTopology: true,
+      useNewUrlParser: true,
     });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));

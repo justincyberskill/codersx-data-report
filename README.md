@@ -3,7 +3,7 @@ This repo is a Report Server of CodersX
 
 It simplely query and aggregate data from database 
 
-Then sent those data to the Google Spreadsheet for Statistical and Analize Purpose.
+Then send those data to the Google Spreadsheet for Statistical and Analize Purpose.
 
 ## Installation requirements
 Please ensure that you installed these things below
@@ -25,5 +25,5 @@ app.js // Main server file
 cronjobs // Contain all our cron-jobs
 models // model & schema for communicate with Database
 utils // Utilities use for setup helpers or third-party packages
-other files... // Configuations files
+other files... // Configuation files
 ```
