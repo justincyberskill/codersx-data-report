@@ -11,8 +11,6 @@ Please ensure that you installed these things below
 
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) - Package Management
 
-- [Nodemon](https://www.npmjs.com/package/nodemon) - Node Script helper
-
 ## Steps to setup this project
 1. Clone the project from Github Repository
 2. Run `yarn` to **install** related packages in `package.json`

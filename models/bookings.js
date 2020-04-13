@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const { String, ObjectId, Date, Number } = mongoose.SchemaTypes;
 
 const schema = new mongoose.Schema({
-  _id: ObjectId,
   updatedAt: Date,
   createdAt: Date,
   mentor: ObjectId,
