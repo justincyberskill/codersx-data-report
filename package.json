@@ -10,7 +10,7 @@
     "lint-fix": "yarn stylelint-fix & yarn eslint-fix & yarn prettier-fix",
     "prettier-fix": "prettier --ignore-path .gitignore '**/*.{js}' --write",
     "dev": "nodemon --exec babel-node app.js",
-    "start": "node app.js"
+    "start": "babel-node app.js"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
