@@ -9,9 +9,6 @@
     "eslint-fix": "eslint --ignore-path .gitignore '**/*.{js,jsx}' --fix",
     "lint-fix": "yarn stylelint-fix & yarn eslint-fix & yarn prettier-fix",
     "prettier-fix": "prettier --ignore-path .gitignore '**/*.{js}' --write",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./app.js -s",
-    "build": "yarn run clean && npm run build-babel",
     "start": "babel-node app.js",
     "dev": "nodemon --exec babel-node app.js"
   },
