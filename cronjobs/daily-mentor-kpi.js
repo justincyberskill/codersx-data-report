@@ -5,7 +5,7 @@ import { appendDataToSheet } from '../utils/googleapis';
 import modelReviews from '../models/reviews';
 import modelBookings from '../models/bookings';
 
-const { SPREADSHEET_ID, AGENDA_DAILY_REPORT_KPI_TIME_PATTERN } = process.env;
+const { SPREADSHEET_ID, AGENDA_DAILY_KPI_REPORT_CRON } = process.env;
 
 // ------ Mongoose models interations with database ------
 const models = {
@@ -51,7 +51,7 @@ const models = {
 agenda.define('daily mentor kpi report', async () => {
   try {
     // Init data
-    const reportDate = new Date(2020, 2, 28, 3, 0, 0);
+    const reportDate = moment().subtract(1, 'days').startOf('date').toDate();
 
     // Database queries
     const [
@@ -86,8 +86,5 @@ agenda.define('daily mentor kpi report', async () => {
 });
 
 export default async function () {
-  await agenda.every(
-    AGENDA_DAILY_REPORT_KPI_TIME_PATTERN,
-    'daily mentor kpi report',
-  );
+  await agenda.every(AGENDA_DAILY_KPI_REPORT_CRON, 'daily mentor kpi report');
 }
