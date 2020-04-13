@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 dotenv.config();
 
-export const { MONGO_URI_LOCAL: mongoUri } = process.env;
+export const { MONGODB_URI: mongoUri } = process.env;
 export default {
   connect(callback) {
     mongoose.connect(mongoUri, {
