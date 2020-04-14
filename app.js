@@ -5,9 +5,9 @@ import dailyStudentKpiJobs from './cronjobs/daily-student-kpi';
 
 function onDatabaseConnected() {
   agenda.on('ready', () => {
-    agenda.start();
     dailyMentorKpiJobs();
     dailyStudentKpiJobs();
+    agenda.start();
   });
 }
 
