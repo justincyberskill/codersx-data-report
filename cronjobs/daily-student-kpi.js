@@ -51,8 +51,8 @@ agenda.define('daily student kpi report', async () => {
     const reportPayload = [
       [
         moment(reportDate).format('L'), // Column: date
-        totalUnlockExercise[0] ? totalUnlockExercise[0].total : 'error', // Column: total unlocked exercise,
-        totalCompletedLessions[0] ? totalCompletedLessions[0].total : 'error', // Column: total completed lessons,
+        totalUnlockExercise[0] ? totalUnlockExercise[0].total : 'no data', // Column: total unlocked exercise,
+        totalCompletedLessions[0] ? totalCompletedLessions[0].total : 'no data', // Column: total completed lessons,
       ],
     ];
 
