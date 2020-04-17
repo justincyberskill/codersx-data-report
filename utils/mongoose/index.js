@@ -10,10 +10,13 @@ export default {
     mongoose.connect(mongoUri, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      useCreateIndex: true,
     });
     const db = mongoose.connection;
+    // eslint-disable-next-line no-console
     db.on('error', console.error.bind(console, 'MongoDB Connection Error:'));
     db.once('open', () => {
+      // eslint-disable-next-line no-console
       console.log('🍣 Great! MongoDB Connected!');
       if (callback) {
         callback();

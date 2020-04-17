@@ -3,16 +3,10 @@
     "@babel/preset-env"
   ],
   "plugins": [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "absoluteRuntime": false,
-        "corejs": false,
-        "helpers": true,
-        "regenerator": true,
-        "useESModules": false,
-        "version": "7.0.0-beta.0"
-      }
-    ]
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-json-strings",
+    "@babel/transform-runtime"
   ]
 }
