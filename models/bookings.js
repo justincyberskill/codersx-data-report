@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const { String, ObjectId, Date, Number } = mongoose.SchemaTypes;
+const {
+  String, ObjectId, Date, Number,
+} = mongoose.SchemaTypes;
 
 const schema = new mongoose.Schema({
   updatedAt: Date,
