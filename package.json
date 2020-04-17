@@ -9,11 +9,11 @@
     "build": "npm run clean && npm run build-server",
     "build-server": "babel . -d build --ignore node_modules,build",
     "clean": "rm -rf build && mkdir build",
-    "dev": "nodemon --inspect --exec babel-node app.js",
+    "dev": "nodemon --inspect --exec babel-node index.js",
     "eslint-fix": "eslint --ignore-path .gitignore '**/*.{js,jsx}' --fix",
     "lint-fix": "yarn stylelint-fix & yarn eslint-fix & yarn prettier-fix",
     "prettier-fix": "prettier --ignore-path .gitignore '**/*.{js}' --write",
-    "start": "node build/app.js"
+    "start": "node build/index.js"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
