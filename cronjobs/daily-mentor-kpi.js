@@ -5,7 +5,7 @@ import { appendDataToSheet } from '../utils/googleapis';
 import modelReviews from '../models/reviews';
 import modelBookings from '../models/bookings';
 
-const { SPREADSHEET_ID, AGENDA_DAILY_KPI_REPORT_CRON } = process.env;
+const { SPREADSHEET_ID, AGENDA_DAILY_KPI_REPORT_CRON, TIME_ZONE } = process.env;
 
 // ------ Mongoose models interations with database ------
 const models = {
@@ -68,12 +68,12 @@ agenda.define('daily mentor kpi report', async () => {
     const reportPayload = [
       [
         moment(reportDate).format('L'), // Column: date
-        avgStarOfReview[0] ? avgStarOfReview[0].avg : 'error', // Column: average review star,
-        totalReview[0] ? totalReview[0].total : 'error', // Column: total review,
-        totalCompletedBooking[0] ? totalCompletedBooking[0].total : 'error', // Column: total completed bookings,
+        avgStarOfReview[0] ? avgStarOfReview[0].avg : 'no data', // Column: average review star,
+        totalReview[0] ? totalReview[0].total : 'no data', // Column: total review,
+        totalCompletedBooking[0] ? totalCompletedBooking[0].total : 'no data', // Column: total completed bookings,
         totalReview[0] && totalCompletedBooking[0]
           ? Math.abs(totalCompletedBooking[0].total - totalReview[0].total)
-          : 'error', // Column: total missing review
+          : 'no data', // Column: total missing review
       ],
     ];
 
@@ -86,5 +86,12 @@ agenda.define('daily mentor kpi report', async () => {
 });
 
 export default async function () {
-  await agenda.every(AGENDA_DAILY_KPI_REPORT_CRON, 'daily mentor kpi report');
+  await agenda.every(
+    AGENDA_DAILY_KPI_REPORT_CRON,
+    'daily mentor kpi report',
+    null,
+    {
+      timezone: TIME_ZONE,
+    },
+  );
 }

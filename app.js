@@ -4,9 +4,11 @@ import dailyMentorKpiJobs from './cronjobs/daily-mentor-kpi';
 import dailyStudentKpiJobs from './cronjobs/daily-student-kpi';
 
 function onDatabaseConnected() {
-  agenda.start();
-  dailyMentorKpiJobs();
-  dailyStudentKpiJobs();
+  agenda.on('ready', () => {
+    dailyMentorKpiJobs();
+    dailyStudentKpiJobs();
+    agenda.start();
+  });
 }
 
 mongoose.connect(onDatabaseConnected);

@@ -5,7 +5,7 @@ import { appendDataToSheet } from '../utils/googleapis';
 import modelUnlockExercies from '../models/unlockExercise';
 import modelCompletedLessons from '../models/completedlessons';
 
-const { SPREADSHEET_ID, AGENDA_DAILY_KPI_REPORT_CRON } = process.env;
+const { SPREADSHEET_ID, AGENDA_DAILY_KPI_REPORT_CRON, TIME_ZONE } = process.env;
 
 // ------ Mongoose models interations with database ------
 const models = {
@@ -51,8 +51,8 @@ agenda.define('daily student kpi report', async () => {
     const reportPayload = [
       [
         moment(reportDate).format('L'), // Column: date
-        totalUnlockExercise[0] ? totalUnlockExercise[0].total : 'error', // Column: total unlocked exercise,
-        totalCompletedLessions[0] ? totalCompletedLessions[0].total : 'error', // Column: total completed lessons,
+        totalUnlockExercise[0] ? totalUnlockExercise[0].total : 'no data', // Column: total unlocked exercise,
+        totalCompletedLessions[0] ? totalCompletedLessions[0].total : 'no data', // Column: total completed lessons,
       ],
     ];
 
@@ -64,6 +64,14 @@ agenda.define('daily student kpi report', async () => {
   }
 });
 
+// Implement agenda's job
 export default async function () {
-  await agenda.every(AGENDA_DAILY_KPI_REPORT_CRON, 'daily student kpi report');
+  await agenda.every(
+    AGENDA_DAILY_KPI_REPORT_CRON,
+    'daily student kpi report',
+    null,
+    {
+      timezone: TIME_ZONE,
+    },
+  );
 }
