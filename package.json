@@ -13,7 +13,7 @@
     "eslint-fix": "eslint --ignore-path .gitignore '**/*.{js,jsx}' --fix",
     "lint-fix": "yarn stylelint-fix & yarn eslint-fix & yarn prettier-fix",
     "prettier-fix": "prettier --ignore-path .gitignore '**/*.{js}' --write",
-    "start": "node build/index.js"
+    "start": "npm run build && node build/index.js"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
