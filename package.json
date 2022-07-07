@@ -22,7 +22,7 @@
     "dotenv": "^8.2.0",
     "global": "^4.4.0",
     "googleapis": "^48.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.9.7"
   },
   "devDependencies": {
